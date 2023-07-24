@@ -19,12 +19,16 @@ def signupuser(request):
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                return redirect('currenttodos')
+                return redirect('home')
             except IntegrityError:
-                return render(request, 'todo/signupuser.html', {'form': UserCreationForm(),
+                return render(request, 'shop/signupuser.html', {'form': UserCreationForm(),
                                                                 'error': 'That username has been already taken. '
                                                                          'Choose another one'})
 
         else:
-            return render(request, 'todo/signupuser.html', {'form': UserCreationForm(),
+            return render(request, 'shop/signupuser.html', {'form': UserCreationForm(),
                                                             'error': 'Passwords did not match'})
+
+
+def show_product(request, product_id):
+    return render(request, 'shop/show_product.html', {'product_id': product_id})
