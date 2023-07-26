@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
+from .models import Product
 
 
 def home(request):
@@ -32,3 +33,8 @@ def signupuser(request):
 
 def show_product(request, product_id):
     return render(request, 'shop/show_product.html', {'product_id': product_id})
+
+
+def all_products(request):
+    products = Product.objects.all()
+    return render(request, 'shop/all_products.html', {'products':products})

@@ -4,10 +4,9 @@ from django.db import models
 class Product(models.Model):
     title = models.CharField(max_length=200)
     price = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='media/shop')
-    category = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='media/shop', blank=True)
     is_available = models.BooleanField(default=True)
-    cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.title
